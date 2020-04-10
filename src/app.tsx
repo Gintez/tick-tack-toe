@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+
 import { isGameStarted } from 'store/selectors';
 import StartGameButton from 'components/start-game-button';
 import Game from 'components/game';
@@ -16,7 +17,8 @@ export const App = (props: Props) => {
   return (
     <div>
       {isGameStarted ? <Game /> : <StartGameButton />}
-    </div>);
+    </div>
+  );
 };
 
 const mapStateToProps = (state: any): StateProps => ({

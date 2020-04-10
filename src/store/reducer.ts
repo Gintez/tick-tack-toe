@@ -22,7 +22,7 @@ interface DefaultState {
 type Payload = any;
 
 const defaultState: DefaultState = {
-  currentPlayer: null,
+  currentPlayer: Players.PLAYER_1,
   isGameStarted: false,
   boardValues: {
     r1c1: null,

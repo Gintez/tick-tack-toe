@@ -47,11 +47,21 @@ const Cell = (props: Props) => {
   const classes = useStyles();
   const { cellValue, actions, cellId, currentPlayer, winner } = props;
 
+  function togglePlayer() {
+    const nextPlayer = currentPlayer == Players.PLAYER_1
+      ? Players.PLAYER_2
+      : Players.PLAYER_1;
+
+    actions.setCurrentPlayer(nextPlayer);
+  }
+
   function setCellValue() {
     actions.setCellValue({
       cellId,
       cellValue: PLAYER_SIGNS[currentPlayer],
     });
+
+    togglePlayer();
   }
 
   function handleCellClick() {

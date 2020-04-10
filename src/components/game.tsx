@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
-import { getCurrentPlayer } from 'store/selectors';
 import { Players, BoardValues } from 'types';
 import * as actions from 'store/actions';
-import { getBoardValues } from 'store/selectors';
+import { getBoardValues, getWinner } from 'store/selectors';
 import checkForWinner from 'helpers/check-for-winner';
 
 import Board from './board';
@@ -14,8 +13,8 @@ import CurrentPlayer from './current-player';
 import RestartButton from './restart-button';
 
 interface StateProps {
-  currentPlayer: Players;
   boardValues: BoardValues;
+  currentWinner: Players;
 }
 
 interface DispatchProps {
@@ -25,7 +24,7 @@ interface DispatchProps {
 type Props = StateProps & DispatchProps;
 
 const Game = (props: Props) => {
-  const { currentPlayer, boardValues, actions } = props;
+  const { boardValues, actions, currentWinner } = props;
 
   useEffect(() => {
     handleGameChange();
@@ -33,20 +32,9 @@ const Game = (props: Props) => {
 
   function handleGameChange() {
     const winner = checkForWinner(boardValues);
-    if (winner) {
+    if (winner && !currentWinner) {
       actions.setWinner(winner as Players);
-      return;
     }
-
-    togglePlayer();
-  }
-
-  function togglePlayer() {
-    const nextPlayer = currentPlayer == Players.PLAYER_1
-      ? Players.PLAYER_2
-      : Players.PLAYER_1;
-
-    actions.setCurrentPlayer(nextPlayer);
   }
 
   return (
@@ -60,8 +48,8 @@ const Game = (props: Props) => {
 };
 
 const mapStateToProps = (state: any): StateProps => ({
-  currentPlayer: getCurrentPlayer(state),
   boardValues: getBoardValues(state),
+  currentWinner: getWinner(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
