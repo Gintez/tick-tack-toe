@@ -1,6 +1,6 @@
 module.exports = {
   roots: ['<rootDir>/src'],
-  'moduleDirectories': ['node_modules', 'src'],
+  'moduleDirectories': ['node_modules', '<rootDir>/src'],
   'transform': {
     '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.(ts|tsx)$': 'ts-jest',

@@ -1,4 +1,4 @@
-import { Players, Signs, CellIds } from '.';
+import { Players, Signs, CellIds } from 'types';
 import chunkArray from 'helpers/chunk-array';
 
 export const WINNING_COMBINATIONS = [

@@ -14,15 +14,13 @@ const useStyles = createUseStyles({
   },
 });
 
-
-
-const Board = () => {
+export const Board = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       {ROWS.map((row, index) => (
-        <div key={index} className={classes.row}>
+        <div data-qa="board-row" key={index} className={classes.row}>
           {row.map(cellId => (
             <Cell key={cellId} cellId={cellId} />
           ))}

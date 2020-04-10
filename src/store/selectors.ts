@@ -1,12 +1,15 @@
-export const isGameStarted = (state: any) => state?.isGameStarted;
+import { State } from 'store';
+import { CellIds } from 'types';
 
-export const getCurrentPlayer = (state: any) => state?.currentPlayer; // TODO: ADD STATE TYPE
+export const isGameStarted = (state: State) => state?.isGameStarted;
 
-export const getCellValue = (state: any, { cellId }: { cellId: string }) =>
-  state?.boardValues?.[cellId]; // TODO: ADD CELL VALUES
+export const getCurrentPlayer = (state: State) => state?.currentPlayer;
 
-export const getGameLogging = (state: any) => state?.actionsLogs;
+export const getCellValue = (state: State, { cellId }: { cellId: CellIds }) =>
+  state?.boardValues?.[cellId];
 
-export const getBoardValues = (state: any) => state?.boardValues;
+export const getGameLogging = (state: State) => state?.actionsLogs;
 
-export const getWinner = (state: any) => state?.winner;
+export const getBoardValues = (state: State) => state?.boardValues;
+
+export const getWinner = (state: State) => state?.winner;

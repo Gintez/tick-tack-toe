@@ -6,7 +6,7 @@ import { loadState, saveState } from 'helpers/session-storage';
 import createRootReducer from './reducer';
 import loggingMiddleware from './logging-middleware';
 
-const setUpStore = () => {
+const configureStore = () => {
   const persistedState = loadState();
 
   const store = createStore(
@@ -22,4 +22,8 @@ const setUpStore = () => {
   return store;
 };
 
-export default setUpStore();
+export type State = ReturnType<typeof store.getState>;
+
+const store = configureStore();
+
+export default store;

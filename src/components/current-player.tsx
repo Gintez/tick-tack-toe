@@ -1,8 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createUseStyles } from 'react-jss';
 
 import { getCurrentPlayer, getWinner } from 'store/selectors';
 import { Players } from 'types';
+import { State } from 'store';
+
+const useStyles = createUseStyles({
+  root: {
+    textAlign: 'center'
+  },
+});
 
 interface StateProps {
   currentPlayer: Players;
@@ -11,17 +19,22 @@ interface StateProps {
 
 type Props = StateProps;
 
-const CurrentPlayer = (props: Props) => {
+export const CurrentPlayer = (props: Props) => {
   const { currentPlayer, winner } = props;
+  const classes = useStyles();
 
-  return winner ? (
-    <div>{`${winner} is a Winner!`}</div>
-  ) : (
-    currentPlayer && <div>{`${currentPlayer} turn`}</div>
+  return (
+    <div className={classes.root}>
+      {winner ? (
+        <div>{`${winner} is a Winner!`}</div>
+      ) : (
+        currentPlayer && <div>{`${currentPlayer} turn`}</div>
+      )}
+    </div>
   );
 };
 
-const mapStateToProps = (state: any): StateProps => ({
+const mapStateToProps = (state: State): StateProps => ({
   currentPlayer: getCurrentPlayer(state),
   winner: getWinner(state),
 });

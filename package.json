@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --mode=development",
     "build": "webpack --mode=production",
-    "test": "jest -c jest.config.js"
+    "test": "jest -c jest.config.js",
+    "types": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
     "@types/redux-actions": "^2.6.1",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
+    "babel-jest": "^25.3.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-runtime": "^6.23.0",

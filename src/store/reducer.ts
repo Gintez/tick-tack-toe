@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions';
+import { Action } from 'redux';
 
 import { Players, BoardValues } from 'types';
 
@@ -15,7 +16,7 @@ interface DefaultState {
   currentPlayer: Players;
   isGameStarted: boolean;
   boardValues: BoardValues;
-  actionsLogs: Array<string>;
+  actionsLogs: Array<Action>;
   winner: Players;
 }
 

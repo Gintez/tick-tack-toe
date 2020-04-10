@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import clsx from 'clsx';
 
-import { Players } from 'types';
+import { Players, Signs, CellIds } from 'types';
 import { PLAYER_SIGNS } from 'types/constants';
 import { getCellValue, getCurrentPlayer, getWinner } from 'store/selectors';
 import * as actions from 'store/actions';
+import { State } from 'store';
 
 const useStyles = createUseStyles({
   root: {
-    height: 100,
-    width: 100,
+    height: 150,
+    width: 150,
     backgroundColor: 'grey',
     border: '1px solid white',
     cursor: 'pointer',
@@ -20,7 +21,7 @@ const useStyles = createUseStyles({
     justifyContent: 'center',
     alignItems: 'center',
     color: 'white',
-    fontSize: 20,
+    fontSize: 30,
   },
   disabled: {
     opacity: 0.5
@@ -32,18 +33,18 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-  cellId: string;
+  cellId: CellIds;
 }
 
 interface StateProps {
-  cellValue: Players;
+  cellValue: Signs;
   currentPlayer: Players;
   winner: Players;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
 
-const Cell = (props: Props) => {
+export const Cell = (props: Props) => {
   const classes = useStyles();
   const { cellValue, actions, cellId, currentPlayer, winner } = props;
 
@@ -70,7 +71,7 @@ const Cell = (props: Props) => {
 
   return (
     <div
-      data-qa="cell"
+      data-qa="board-cell"
       onClick={handleCellClick}
       className={clsx(classes.root, { [classes.disabled]: !!winner })}
     >
@@ -83,7 +84,7 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   actions: bindActionCreators(actions, dispatch),
 });
 
-const mapStateToProps = (state: any, ownProps: OwnProps): StateProps => ({
+const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => ({
   cellValue: getCellValue(state, { cellId: ownProps?.cellId }),
   currentPlayer: getCurrentPlayer(state),
   winner: getWinner(state),

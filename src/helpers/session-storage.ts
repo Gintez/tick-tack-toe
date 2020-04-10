@@ -1,3 +1,5 @@
+import { State } from 'store';
+
 export const loadState = () => {
   try {
     const serializedState = sessionStorage.getItem('state');
@@ -10,7 +12,9 @@ export const loadState = () => {
   }
 };
 
-export const saveState = (state: any) => {
-  const serializedState = JSON.stringify(state);
-  sessionStorage.setItem('state', serializedState);
+export const saveState = (state: State) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    sessionStorage.setItem('state', serializedState);
+  } catch {}
 };

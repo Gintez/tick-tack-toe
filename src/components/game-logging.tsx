@@ -4,6 +4,7 @@ import { Action } from 'redux';
 
 import * as actions from 'store/actions';
 import { getGameLogging } from 'store/selectors';
+import { State } from 'store';
 
 interface StateProps {
   actionsLogging: Array<Action>;
@@ -35,20 +36,20 @@ function createGameLogs(relevantActions: Array<Action>) {
   return gameLogs;
 }
 
-const GameLogging = (props: Props) => {
+export const GameLogging = (props: Props) => {
   const { actionsLogging = [] } = props;
   const gameLogs = createGameLogs(actionsLogging);
 
   return (
     <div>
       {gameLogs.map(log => (
-        <div key={log}>{log}</div>
+        <div data-qa='game-log' key={log}>{log}</div>
       ))}
     </div>
   );
 };
 
-const mapStateToProps = (state: any): StateProps => ({
+const mapStateToProps = (state: State): StateProps => ({
   actionsLogging: getGameLogging(state),
 });
 

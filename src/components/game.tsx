@@ -6,6 +6,7 @@ import { Players, BoardValues } from 'types';
 import * as actions from 'store/actions';
 import { getBoardValues, getWinner } from 'store/selectors';
 import checkForWinner from 'helpers/check-for-winner';
+import { State } from 'store';
 
 import Board from './board';
 import GameLogging from './game-logging';
@@ -38,7 +39,7 @@ const Game = (props: Props) => {
   }
 
   return (
-    <div>
+    <div data-qa="game">
       <CurrentPlayer />
       <Board />
       <RestartButton />
@@ -47,7 +48,7 @@ const Game = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state: any): StateProps => ({
+const mapStateToProps = (state: State): StateProps => ({
   boardValues: getBoardValues(state),
   currentWinner: getWinner(state),
 });
