@@ -18,7 +18,7 @@ const createBoardMock = (val: any = {}): BoardValues => ({
 
 describe('checkForWinner', () => {
   describe('when empty value', () => {
-    it('should return false', () => {
+    it('returns false', () => {
       const subject = checkForWinner(null);
 
       expect(subject).toBe(false);
@@ -26,7 +26,7 @@ describe('checkForWinner', () => {
   });
 
   describe('when empty board', () => {
-    it('should return false', () => {
+    it('returns false', () => {
       const emptyBoard = createBoardMock();
       const subject = checkForWinner(emptyBoard);
 
@@ -35,7 +35,7 @@ describe('checkForWinner', () => {
   });
 
   describe('when there is no winning combination', () => {
-    it('should return false', () => {
+    it('returns false', () => {
       const boardValues = createBoardMock({
         r1c1: PLAYER_SIGNS[Players.PLAYER_1],
         r1c2: PLAYER_SIGNS[Players.PLAYER_1],
@@ -50,7 +50,7 @@ describe('checkForWinner', () => {
   describe('when the is a winning combination', () => {
 
     describe('when player 1 wins', () => {
-      it('should return PLAYER_1', () => {
+      it('returns PLAYER_1', () => {
         const boardValues = createBoardMock({
           r1c3: PLAYER_SIGNS[Players.PLAYER_1],
           r2c2: PLAYER_SIGNS[Players.PLAYER_1],
@@ -63,7 +63,7 @@ describe('checkForWinner', () => {
     })
 
     describe('when player 2 wins', () => {
-      it('should return PLAYER_2', () => {
+      it('returns PLAYER_2', () => {
         const boardValues = createBoardMock({
           r1c1: PLAYER_SIGNS[Players.PLAYER_2],
           r1c2: PLAYER_SIGNS[Players.PLAYER_2],

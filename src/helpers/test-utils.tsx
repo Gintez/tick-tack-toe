@@ -4,7 +4,7 @@ import { render, RenderResult } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import createRootReducer from 'store/reducer';
+import createRootReducer from 'store/root-reducer';
 
 interface HistoryProps {
   initialEntries?: Array<string>;

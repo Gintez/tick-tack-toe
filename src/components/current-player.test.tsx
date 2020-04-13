@@ -18,9 +18,9 @@ describe('<CurrentPlayer />', () => {
       );
     })
 
-    it('should announce the winner', () => {
+    it('announces the winner', () => {
       const { queryByText } = wrapper;
-      const winnerText = queryByText(`${winner} is a Winner!`);
+      const winnerText = queryByText(`${winner} has won!`);
   
       expect(winnerText).toBeInTheDocument();
     });
@@ -36,7 +36,7 @@ describe('<CurrentPlayer />', () => {
       );
     })
 
-    it('should say which player turn it is', () => {
+    it('says which player`s turn it is', () => {
       const { queryByText } = wrapper;
       const winnerText = queryByText(`${currentPlayer} turn`);
   

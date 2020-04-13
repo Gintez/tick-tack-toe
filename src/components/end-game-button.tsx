@@ -12,18 +12,18 @@ interface DispatchProps {
 
 type Props = DispatchProps;
 
-const RestartButton = (props: Props) => {
+const EndGameButton = (props: Props) => {
   const { actions } = props;
 
-  function handleRestart() {
+  function handleEndGame() {
     actions.endGame();
   }
 
-  return (<Button onClick={handleRestart}>Restart</Button>);
+  return (<Button onClick={handleEndGame}>End Game</Button>);
 }
 
 const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
   actions: bindActionCreators(actions, dispatch),
 });
 
-export default connect(null, mapDispatchToProps)(RestartButton);
+export default connect(null, mapDispatchToProps)(EndGameButton);

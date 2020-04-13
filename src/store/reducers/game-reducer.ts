@@ -1,5 +1,4 @@
 import { handleActions } from 'redux-actions';
-import { Action } from 'redux';
 
 import { Players, BoardValues } from 'types';
 
@@ -7,16 +6,14 @@ import {
   setCurrentPlayer,
   startGame,
   setCellValue,
-  addActionLog,
   endGame,
   setWinner
-} from './actions';
+} from '../actions';
 
 interface DefaultState {
   currentPlayer: Players;
   isGameStarted: boolean;
   boardValues: BoardValues;
-  actionsLogs: Array<Action>;
   winner: Players;
 }
 
@@ -36,7 +33,6 @@ const defaultState: DefaultState = {
     r3c2: null,
     r3c3: null,
   },
-  actionsLogs: [],
   winner: null,
 };
 
@@ -56,10 +52,6 @@ const reducer = handleActions<DefaultState, Payload>(
         ...state.boardValues,
         [payload.cellId]: payload.cellValue,
       },
-    }),
-    [addActionLog.toString()]: (state, { payload }) => ({
-      ...state,
-      actionsLogs: [payload, ...state.actionsLogs],
     }),
     [endGame.toString()]: () => defaultState,
     [setWinner.toString()]: (state, { payload }) => ({

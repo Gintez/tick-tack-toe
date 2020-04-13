@@ -3,8 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
 import { loadState, saveState } from 'helpers/session-storage';
 
-import createRootReducer from './reducer';
-import loggingMiddleware from './logging-middleware';
+import createRootReducer from './root-reducer';
 
 const configureStore = () => {
   const persistedState = loadState();
@@ -12,7 +11,7 @@ const configureStore = () => {
   const store = createStore(
     createRootReducer,
     persistedState,
-    composeWithDevTools(applyMiddleware(loggingMiddleware)),
+    composeWithDevTools(applyMiddleware()),
   );
 
   store.subscribe(() => {

@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { Players, Signs, CellIds } from 'types';
 import { PLAYER_SIGNS } from 'types/constants';
-import { getCellValue, getCurrentPlayer, getWinner } from 'store/selectors';
+import { getCellValue, getCurrentPlayer } from 'store/selectors';
 import * as actions from 'store/actions';
 import { State } from 'store';
 
@@ -34,27 +34,27 @@ interface DispatchProps {
 
 interface OwnProps {
   cellId: CellIds;
+  isDisabled?: boolean;
+  onChange?: () => void;
 }
 
 interface StateProps {
   cellValue: Signs;
   currentPlayer: Players;
-  winner: Players;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
 
 export const Cell = (props: Props) => {
   const classes = useStyles();
-  const { cellValue, actions, cellId, currentPlayer, winner } = props;
-
-  function togglePlayer() {
-    const nextPlayer = currentPlayer == Players.PLAYER_1
-      ? Players.PLAYER_2
-      : Players.PLAYER_1;
-
-    actions.setCurrentPlayer(nextPlayer);
-  }
+  const {
+    cellValue,
+    actions,
+    cellId,
+    currentPlayer,
+    isDisabled,
+    onChange,
+  } = props;
 
   function setCellValue() {
     actions.setCellValue({
@@ -62,18 +62,18 @@ export const Cell = (props: Props) => {
       cellValue: PLAYER_SIGNS[currentPlayer],
     });
 
-    togglePlayer();
+    onChange && onChange();
   }
 
   function handleCellClick() {
-    !cellValue && !winner && setCellValue();
+    !cellValue && !isDisabled && setCellValue();
   }
 
   return (
     <div
       data-qa="board-cell"
       onClick={handleCellClick}
-      className={clsx(classes.root, { [classes.disabled]: !!winner })}
+      className={clsx(classes.root, { [classes.disabled]: isDisabled })}
     >
       {cellValue || ''}
     </div>
@@ -87,7 +87,6 @@ const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
 const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => ({
   cellValue: getCellValue(state, { cellId: ownProps?.cellId }),
   currentPlayer: getCurrentPlayer(state),
-  winner: getWinner(state),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cell);

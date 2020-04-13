@@ -26,7 +26,7 @@ export const CurrentPlayer = (props: Props) => {
   return (
     <div className={classes.root}>
       {winner ? (
-        <div>{`${winner} is a Winner!`}</div>
+        <div>{`${winner} has won!`}</div>
       ) : (
         currentPlayer && <div>{`${currentPlayer} turn`}</div>
       )}

@@ -12,14 +12,14 @@ describe('<Board />', () => {
     );
   })
 
-  it('should render 3 rows', () => {
+  it('renders 3 rows', () => {
     const { queryAllByTestId } = wrapper;
     const boardRows = queryAllByTestId('board-row');
 
     expect(boardRows.length).toBe(3);
   });
 
-  it('should render 9 cells', () => {
+  it('renders 9 cells', () => {
     const { queryAllByTestId } = wrapper;
     const boardRows = queryAllByTestId('board-cell');
 

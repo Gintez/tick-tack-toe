@@ -14,15 +14,23 @@ const useStyles = createUseStyles({
   },
 });
 
-export const Board = () => {
+interface OwnProps {
+  isDisabled?: boolean;
+  onCellChange?: () => void;
+}
+
+type Props = OwnProps;
+
+export const Board = (props: Props) => {
   const classes = useStyles();
+  const { isDisabled, onCellChange } = props;
 
   return (
     <div className={classes.root}>
       {ROWS.map((row, index) => (
         <div data-qa="board-row" key={index} className={classes.row}>
           {row.map(cellId => (
-            <Cell key={cellId} cellId={cellId} />
+            <Cell key={cellId} cellId={cellId} isDisabled={isDisabled} onChange={onCellChange} />
           ))}
         </div>
       ))}

@@ -9,13 +9,12 @@ import * as actions from 'store/actions';
 import { Cell } from './cell';
 
 const setCellValue = jest.fn();
-const setCurrentPlayer = jest.fn();
-const actionsMock = { ...actions, setCellValue, setCurrentPlayer };
+const actionsMock = { ...actions, setCellValue };
 
 describe('<Cell />', () => {
   describe('when cell value exists', () => {
     let wrapper: any;
-    const actionsMock = { ...actions, setCellValue, setCurrentPlayer };
+    const actionsMock = { ...actions, setCellValue };
     const cellValue = Signs.O;
 
     beforeEach(() => {
@@ -23,7 +22,6 @@ describe('<Cell />', () => {
       wrapper = renderWithProviders(
         <Cell
           cellId={CellIds.r1c1}
-          winner={null}
           currentPlayer={Players.PLAYER_1}
           cellValue={cellValue}
           actions={actionsMock}
@@ -31,7 +29,7 @@ describe('<Cell />', () => {
       );
     });
 
-    it('should render cell value', () => {
+    it('renders cell value', () => {
       const { queryByText } = wrapper;
       const subject = queryByText(cellValue);
 
@@ -39,7 +37,7 @@ describe('<Cell />', () => {
     });
 
     describe('on click', () => {
-      it('should not call setCellValue', () => {
+      it('does not set cell value', () => {
         const { getByTestId } = wrapper;
         const button = getByTestId('board-cell');
         fireEvent.click(button);
@@ -47,13 +45,6 @@ describe('<Cell />', () => {
         expect(setCellValue).not.toBeCalled();
       });
 
-      it('should not call setCurrentPlayer', () => {
-        const { getByTestId } = wrapper;
-        const button = getByTestId('board-cell');
-        fireEvent.click(button);
-
-        expect(setCurrentPlayer).not.toBeCalled();
-      });
     });
   });
 
@@ -67,7 +58,6 @@ describe('<Cell />', () => {
       wrapper = renderWithProviders(
         <Cell
           cellId={cellId}
-          winner={null}
           currentPlayer={currentPlayer}
           cellValue={null}
           actions={actionsMock}
@@ -76,7 +66,7 @@ describe('<Cell />', () => {
     });
 
     describe('on click', () => {
-      it('should call setCellValue', () => {
+      it('sets cell value', () => {
         const { getByTestId } = wrapper;
         const button = getByTestId('board-cell');
         fireEvent.click(button);
@@ -86,29 +76,20 @@ describe('<Cell />', () => {
           cellValue: PLAYER_SIGNS[currentPlayer],
         });
       });
-
-      it('should call setCurrentPlayer', () => {
-        const { getByTestId } = wrapper;
-        const button = getByTestId('board-cell');
-        fireEvent.click(button);
-
-        expect(setCurrentPlayer).toBeCalledWith(Players.PLAYER_2);
-      });
     });
   });
 
-  describe('when there is a winner', () => {
+  describe('when board is disabled', () => {
     let wrapper: any;
     const currentPlayer = Players.PLAYER_1;
     const cellId = CellIds.r1c1;
-    const winner = Players.PLAYER_1;
 
     beforeEach(() => {
       jest.clearAllMocks();
       wrapper = renderWithProviders(
         <Cell
           cellId={cellId}
-          winner={winner}
+          isDisabled
           currentPlayer={currentPlayer}
           cellValue={null}
           actions={actionsMock}
@@ -117,20 +98,12 @@ describe('<Cell />', () => {
     });
 
     describe('on click', () => {
-      it('should not call setCellValue', () => {
+      it('does not set cell value', () => {
         const { getByTestId } = wrapper;
         const button = getByTestId('board-cell');
         fireEvent.click(button);
 
         expect(setCellValue).not.toBeCalled();
-      });
-
-      it('should not call setCurrentPlayer', () => {
-        const { getByTestId } = wrapper;
-        const button = getByTestId('board-cell');
-        fireEvent.click(button);
-
-        expect(setCurrentPlayer).not.toBeCalled();
       });
     });
   })

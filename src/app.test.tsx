@@ -12,14 +12,14 @@ describe('<App />', () => {
       );
     })
 
-    it('should render start game button', () => {
+    it('renders start game button', () => {
       const { queryByTestId } = wrapper;
       const startGameButton = queryByTestId('button--start-game');
   
       expect(startGameButton).toBeInTheDocument();
     });
 
-    it('should not render game', () => {
+    it('does not render game', () => {
       const { queryByTestId } = wrapper;
       const game = queryByTestId('game');
   
@@ -35,14 +35,14 @@ describe('<App />', () => {
       );
     })
 
-    it('should not render start game button', () => {
+    it('does not render start game button', () => {
       const { queryByTestId } = wrapper;
       const startGameButton = queryByTestId('button--start-game');
   
       expect(startGameButton).not.toBeInTheDocument();
     })
 
-    it('should render game', () => {
+    it('renders game', () => {
       const { queryByTestId } = wrapper;
       const game = queryByTestId('game');
   
